@@ -1,22 +1,22 @@
 def visa?(card)
-  # TODO: A visa card starts with a 4
-  card.delete(" ")[0] == "4"
+  # A visa card starts with a 4
+  card.delete(' ')[0] == '4'
 end
 
 def mastercard?(card)
-  # TODO: A mastercard card starts with a 5
-  card.delete(" ")[0] == "5"
+  # A mastercard card starts with a 5
+  card.delete(' ')[0] == '5'
 end
 
 def valid_card?(card)
-  # TODO: Implement the validator. Return true if the card is valid, false otherwise.
+  # Implement the validator. Return true if the card is valid, false otherwise.
   # return false if the card number is empty
   return false if card.length.zero?
 
   # delete spaces in the card string, reverse it, turn it into an array
   # turn each string of the array into a number
   # the reversed araay is required to perform Luhn's algorithm
-  reverse_array = card.delete(" ").reverse.chars.map { |num| num.to_i }
+  reverse_array = card.delete(' ').reverse.chars.map { |num| num.to_i }
   # map over the reverse array
   luhn_array = reverse_array.map.with_index do |num, i|
     # if the index is odd, multiply it by 2.
