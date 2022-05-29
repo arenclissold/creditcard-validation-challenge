@@ -1,5 +1,15 @@
 const assert = require("assert");
-const { checkSum, cardType, checkCreditcard } = require("../credit_card_checker.js");
+const { cleanCardNumber, checkSum, cardType, checkCreditcard } = require("../credit_card_checker.js");
+
+describe("cleanCardNumber", () => {
+  it("should convert a numerical input into a string", () => {
+    assert.equal(cleanCardNumber(4485888168897969), '4485888168897969');
+  });
+
+  it("should remove whitespace or special characters between numbers", () => {
+    assert.equal(cleanCardNumber('  4485 8881-6889-7969'), '4485888168897969');
+  });
+});
 
 describe("checkSum", () => {
   it("should return the correct checksum as a result of Luhn's algorithm", () => {
@@ -51,7 +61,7 @@ describe("cardType", () => {
 
 describe("checkCreditcard", () => {
   it("should return the correct type of a valid card", () => {
-    assert.equal(checkCreditcard('4003600000000014'), 'VISA');
+    assert.equal(checkCreditcard('4003-6000-0000-0014'), 'VISA');
   });
 
   it("should return invalid for any card that fails Luhn's algorithm", () => {

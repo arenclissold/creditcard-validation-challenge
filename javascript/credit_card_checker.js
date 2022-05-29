@@ -1,3 +1,9 @@
+const cleanCardNumber = (cardNumber) => {
+  // convert input into string and then remove all non-numerics
+  return cardNumber.toString().replace(/\D/gm, '')
+}
+
+
 const checkSum = (cardNumber) => {
   // create an array for each of the card numbers in cardNumber
   const arr = cardNumber.split('').map(num => Number(num))
@@ -53,12 +59,14 @@ const cardType = (cardNumber) => {
 }
 
 const checkCreditcard = (cardNumber) => {
-  const cardSum = checkSum(cardNumber)
+  const cleanCard = cleanCardNumber(cardNumber)
+  const cardSum = checkSum(cleanCard)
   if (cardSum % 10 === 0) {
-    return cardType(cardNumber)
+    return cardType(cleanCard)
   } else {
   return "INVALID"
   }
 }
 
-module.exports = { checkSum, cardType, checkCreditcard };
+// export for testing
+module.exports = { cleanCardNumber, checkSum, cardType, checkCreditcard };
